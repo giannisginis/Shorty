@@ -25,14 +25,15 @@ class UrlShortener:
 
         if "tinyurl" in self.provider.lower():
             url = self.URL_method + "?" + urlencode({"url": self.params['long_url']})
-            res = requests.get(url)
+            res = requests.post(url)
             return {"status_code": res.status_code, "url": self.params['long_url'],
                     "link": res.text,
                     "provider": self.URL_method}
         elif "bitly" in self.provider.lower():
             res = requests.post(self.URL_method, json=self.params, headers=self.header)
+            link = None if res.status_code not in [200, 201] else res.json().get("link")
             return {"status_code": res.status_code, "url": self.params['long_url'],
-                    "link": res.json().get("link"), "provider": self.URL_method}
+                    "link": link, "provider": self.URL_method}
         else:
-            return {"status_code": 400, "url": self.params["long_url"], "link": None,
-                    "provider": "Not supported Provider. Choose between bit.ly and tinyurl"}
+            return {"status_code": 404,
+                    "message": "Not supported Provider. Choose between bit.ly and tinyurl"}
