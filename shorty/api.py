@@ -21,7 +21,12 @@ def create_shortlink():
         obj = UrlShortener(url=req.get('url'))
         results = obj.shorten()
         if results['status_code'] not in [200, 201]:
-            return jsonify(ErrorHandler(status_code=results['status_code']).to_dict())
+            obj.alter_provider()
+            results = obj.shorten()
+            if results['status_code'] not in [200, 201]:
+                return jsonify(ErrorHandler(status_code=results['status_code']).to_dict())
+            else:
+                return jsonify(results)
         else:
             return jsonify(results)
 

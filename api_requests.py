@@ -33,7 +33,7 @@ class UrlShortenBitly:
 
     def shorten(self):
         try:
-            res = requests.post(self.URL_method, json=self.params, headers=self.header)
+            res = requests.post(self.URL_method, json=self.params, headers=self.header, timeout=0.1)
             print(f'Shortening Method: {self.URL_method}')
             print("STATUS CODE:", res.status_code)
             print("   LONG URL:", res.json().get("long_url"))
