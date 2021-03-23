@@ -20,10 +20,19 @@ class UrlShortener:
                 "Content-Type": "application/json"
             }
             self.URL_method = "https://api-ssl.bitly.com/v4/shorten"
+        else:
+            self.provider = "unknown"
+
+    def alter_provider(self):
+        self.provider = "tinyurl" if self.provider == "bitly" else "bitly"
+        self._choose_and_init_provider()
 
     def shorten(self):
 
-        if "tinyurl" in self.provider.lower():
+        if self.provider == "unknown":
+            return {"status_code": 404,
+                    "message": "Not supported Provider. Choose between bit.ly and tinyurl"}
+        elif "tinyurl" in self.provider.lower():
             url = self.URL_method + "?" + urlencode({"url": self.params['long_url']})
             res = requests.post(url)
             return {"status_code": res.status_code, "url": self.params['long_url'],
@@ -34,6 +43,3 @@ class UrlShortener:
             link = None if res.status_code not in [200, 201] else res.json().get("link")
             return {"status_code": res.status_code, "url": self.params['long_url'],
                     "link": link, "provider": self.URL_method}
-        else:
-            return {"status_code": 404,
-                    "message": "Not supported Provider. Choose between bit.ly and tinyurl"}
