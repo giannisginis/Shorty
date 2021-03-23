@@ -43,8 +43,8 @@ class UrlShortenBitly:
 
 
 if __name__ == '__main__':
-    req = {"long_url": "https://example.com",
-           "url_link": "https://tinyurl.com/8h1bka"}
+    req = {"long_url": "https://mastoras.com",
+           "url_link": "bit.ly"}
 
     if "tinyurl" in req["url_link"].lower():
         try:

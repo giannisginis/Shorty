@@ -1,5 +1,5 @@
 from flask import Flask
-from shorty.api_deb import api
+from shorty.api import api
 
 
 def create_app(settings_overrides=None):
