@@ -48,12 +48,12 @@ If the provider is not supplied the microservice by default uses `bit.ly` and in
 
 ## Design
 
-The `Shorty` architecture and design are given in detail in the [design documentation](documentss/design.md). 
+The `Shorty` architecture and design are given in detail in the [design documentation](documents/design.md). 
 
 
 ## Installation
 
-Installation guidelines can be found in [the installation document](documentss/installation.md).
+Installation guidelines can be found in [the installation document](documents/installation.md).
 
 
 ## Execution
