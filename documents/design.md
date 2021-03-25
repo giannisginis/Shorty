@@ -1,4 +1,4 @@
-# <img src="icons/logo.jpeg" width="120" height="120"/>&nbsp;&nbsp;&nbsp;Shorty
+# <img src="icons/logo.jpeg" width="450" height="200"/>&nbsp;&nbsp;&nbsp;Shorty
 
 A Url shortener API.
 
