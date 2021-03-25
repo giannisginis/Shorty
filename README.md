@@ -17,7 +17,7 @@ A Url shortener API.
 
 
 Overview
-======================
+---------
 
 `Shorty` is a microservice which supports two URL shortening providers: [bit.ly](https://dev.bitly.com/) and [tinyurl.com](https://gist.github.com/MikeRogers0/2907534). The service exposes a single endpoint: `POST /shortlinks`. The endpoint receive
 JSON with the following schema:
@@ -52,19 +52,16 @@ If the provider is not supplied the microservice by default uses `bit.ly` and in
 * [Pytest-mock](https://github.com/pytest-dev/pytest-mock/)
 
 ## Design
----------
 
 The `Shorty` architecture and design are given in detail in the [design documentation](docs/design.md). 
 
 
 ## Installation
----------
 
 Installation guidelines can be found in [the installation document](docs/installation.md).
 
 
 ## Execution
----------
 
 With the virtual enviroment installed:
 
@@ -86,8 +83,3 @@ Resources
 2. `pytest`: http://pytest.org/latest/
 3. `virtualenvwrapper`: https://virtualenvwrapper.readthedocs.io/en/latest/
 4. `HTTP statuses`: https://httpstatuses.com/
-
-Disclaimer
-----------
-
-We will not use any of this code for any of Plum's applications.
