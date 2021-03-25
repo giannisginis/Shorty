@@ -63,12 +63,12 @@ Activate virtual environment:
 $ source path2venv/bin/activate
 ```
 
-Start flask server running:
+Start flask server:
 
 ```Python
 $ python run.py
 ```
-make the request:
+Make the request:
 
 ```bash
 $ curl -i -H "Content-Type: application/json" -X get -d '{"url":"www.example.com", "provider": "tinyurl"}' http://127.0.0.1:5000/shortlinks
