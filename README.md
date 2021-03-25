@@ -1,3 +1,5 @@
+# <img src="documents/icons/logo.jpeg" width="250" height="150"/>&nbsp;&nbsp;&nbsp;
+
 # Shorty
 
 A Url shortener API.

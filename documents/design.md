@@ -1,4 +1,6 @@
-# <img src="icons/logo.png" width="120" height="120"/>&nbsp;&nbsp;&nbsp;Shorty
+# <img src="icons/logo.jpeg" width="250" height="150"/>&nbsp;&nbsp;&nbsp;
+
+# Shorty
 
 A Url shortener API.
 
@@ -85,7 +87,7 @@ and makes the proper post request for the `bit.ly` provider. If the response htt
 `tinyurl` and repeats the procedure. If the response http status is again not successful then the handler returns the corresponding http status code with 
 its default message. For both cases, the successfull response returns a json with the requested `url` and the corresponding `link`.
 
-
-# <img src="icons/fallback.png" width="120" height="120"/>&nbsp;&nbsp;&nbsp;Fallback design
+### Fallback design
+# <img src="icons/fallback.png" width="571" height="162"/>&nbsp;&nbsp;&nbsp;
 
 
