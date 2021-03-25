@@ -61,6 +61,14 @@ Activate virtual environment:
 ```Python
 $ source path2venv/bin/activate
 ```
+Clone the project:
+```bash
+$ git clone https://github.com/giannisginis/Shorty.git
+```
+CD to project:
+```bash
+$ cd Shorty
+```
 
 Start flask server:
 
