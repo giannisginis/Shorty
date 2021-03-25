@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from shorty.brain import Shorty
 from shorty.errors import ErrorHandler
+from shorty.validators import Validators
 
 api = Blueprint('api', __name__)
 
@@ -8,11 +9,10 @@ api = Blueprint('api', __name__)
 @api.route('/shortlinks', methods=['GET'])
 def create_shortlink():
     req = request.get_json()
-    if not req.get("url") or (len(req) == 2 and not req.get("provider")):
+    status_code, message = Validators(req).validate()
+    if status_code != 200:
         return jsonify(
-            ErrorHandler(
-                'Invalid parameters. Provide a <url> and optionally a <provider> parameter.',
-                status_code=400).to_dict())
+            ErrorHandler(message=message, status_code=status_code).to_dict())
 
     if not req.get("provider"):
         obj = Shorty(url=req.get('url'))
