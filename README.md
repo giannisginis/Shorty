@@ -73,11 +73,3 @@ Make the request:
 ```bash
 $ curl -i -H "Content-Type: application/json" -X get -d '{"url":"www.example.com", "provider": "tinyurl"}' http://127.0.0.1:5000/shortlinks
 ```
-
-Resources
----------
-
-1. `Flask`: http://flask.pocoo.org/
-2. `pytest`: http://pytest.org/latest/
-3. `virtualenvwrapper`: https://virtualenvwrapper.readthedocs.io/en/latest/
-4. `HTTP statuses`: https://httpstatuses.com/
