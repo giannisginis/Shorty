@@ -38,8 +38,6 @@ For example:
 }
 ```
 
-If the provider is not supplied the microservice by default uses `bit.ly` and in case is not available fallback to `tinyurl`.
-
 ### Technology stack
 
 * [Python 3.7.x](https://www.python.org/)
@@ -63,6 +61,14 @@ Activate virtual environment:
 ```Python
 $ source path2venv/bin/activate
 ```
+Clone the project:
+```bash
+$ git clone https://github.com/giannisginis/Shorty.git
+```
+CD to project:
+```bash
+$ cd Shorty
+```
 
 Start flask server:
 
@@ -72,5 +78,5 @@ $ python run.py
 Make the request:
 
 ```bash
-$ curl -i -H "Content-Type: application/json" -X post -d '{"url":"www.example.com", "provider": "tinyurl"}' http://127.0.0.1:5000/shortlinks
+$ curl -i -H "Content-Type: application/json" -X post -d '{"url":"https://www.example.com", "provider": "tinyurl"}' http://127.0.0.1:5000/shortlinks
 ```
