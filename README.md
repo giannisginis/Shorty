@@ -53,17 +53,20 @@ If the provider is not supplied the microservice by default uses `bit.ly` and in
 
 ## Design
 
-The `Shorty` architecture and design are given in detail in the [design documentation](docs/design.md). 
+The `Shorty` architecture and design are given in detail in the [design documentation](documentss/design.md). 
 
 
 ## Installation
 
-Installation guidelines can be found in [the installation document](docs/installation.md).
+Installation guidelines can be found in [the installation document](documentss/installation.md).
 
 
 ## Execution
 
-With the virtual enviroment installed:
+Activate virtual environment:
+```Python
+$ source path2venv/bin/activate
+```
 
 Start flask server running:
 
