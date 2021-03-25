@@ -13,6 +13,21 @@ class ResponseOverride(Exception):
                            "provider": self.provider, "message": self.message}
         self.attributes_str = json.dumps(self.attributes)
 
+    def get_status_code(self):
+        return self.status_code
+
+    def get_url(self):
+        return self.url
+
+    def get_link(self):
+        return self.text
+
+    def get_provider(self):
+        return self.provider
+
+    def get_message(self):
+        return self.message
+
     def json(self):
         return json.loads(self.attributes_str)
 

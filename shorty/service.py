@@ -10,7 +10,8 @@ from configs.config import *
 class Shorty:
 
     def __init__(self, url: str, provider: Optional[str] = None):
-        self.provider = re.sub(r'[^\w\s]', '', provider) if provider is not None else "bitly"
+        self.provider = re.sub(r'[^\w\s]', '', provider) if provider is not None else BitLy.NAME
+        self.supplied_provider = False if not provider else True
         self.params = {"long_url": url}
         self.URL_method = None
         self.header = {}
@@ -39,36 +40,36 @@ class Shorty:
     def _make_requests(self):
 
         if self.provider == GeneralStrs.UNKNOWN:
-            return ResponseOverride(status_code=404, message=Messages.WRONG_PROVIDER_MSG).to_dict()
+            return ResponseOverride(status_code=404, message=Messages.WRONG_PROVIDER_MSG)
         elif TinyUrl.NAME in self.provider.lower():
             res = self.handler.post_request(provider=self.provider)
             return ResponseOverride(status_code=res.status_code, url=self.params['long_url'], link=res.text,
-                                    provider=self.URL_method).to_dict()
+                                    provider=self.URL_method)
         elif BitLy.NAME in self.provider.lower():
             res = self.handler.post_request(provider=self.provider)
             link = None if res.status_code not in [200, 201] else res.json().get("link")
 
             return ResponseOverride(status_code=res.status_code, url=self.params['long_url'], link=link,
-                                    provider=self.URL_method).to_dict()
+                                    provider=self.URL_method)
 
-    def shorten(self, supplied_provider=False):
-        if not supplied_provider:
+    def shorten(self):
+        if not self.supplied_provider:
             results = self._make_requests()
-            if results['status_code'] not in [200, 201]:
+            if results.get_status_code() not in [200, 201]:
                 self._alter_provider()
                 results = self._make_requests()
-                if results['status_code'] not in [200, 201]:
-                    return jsonify(ErrorHandler(status_code=results['status_code']).to_dict())
+                if results.get_status_code() not in [200, 201]:
+                    return jsonify(ErrorHandler(status_code=results.get_status_code()).to_dict())
                 else:
-                    return jsonify({"url": results["url"], "link": results["link"]})
+                    return jsonify({"url": results.get_url(), "link": results.get_link()})
             else:
-                return jsonify({"url": results["url"], "link": results["link"]})
+                return jsonify({"url": results.get_url(), "link": results.get_link()})
 
-        elif supplied_provider:
+        elif self.supplied_provider:
             results = self._make_requests()
-            if results['status_code'] not in [200, 201]:
+            if results.get_status_code() not in [200, 201]:
                 return jsonify(
-                    ErrorHandler(message=results['message'],
-                                 status_code=results['status_code']).to_dict())
+                    ErrorHandler(message=results.get_message(),
+                                 status_code=results.get_status_code()).to_dict())
             else:
-                return jsonify({"url": results["url"], "link": results["link"]})
+                return jsonify({"url": results.get_url(), "link": results.get_link()})
