@@ -1,7 +1,7 @@
 import requests
 from urllib.parse import urlencode
 from typing import Dict, Any
-from shorty.Response import Response
+from shorty.ResponseOverride import ResponseOverride
 
 
 class Handler:
@@ -17,9 +17,9 @@ class Handler:
                 url = self.api_provider + "?" + urlencode({"url": self.parameters['long_url']})
                 return requests.post(url)
             except requests.exceptions.Timeout:
-                return Response(status_code=408)
+                return ResponseOverride(status_code=408)
         elif provider == "bitly":
             try:
                 return requests.post(self.api_provider, json=self.parameters, headers=self.headers)
             except requests.exceptions.Timeout:
-                return Response(status_code=408)
+                return ResponseOverride(status_code=408)

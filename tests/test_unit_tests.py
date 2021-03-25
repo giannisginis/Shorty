@@ -1,14 +1,16 @@
 import json
+from requests.exceptions import Timeout
 
 
-class Response:
+class MockResponse:
     def __init__(self, status_code: int = None, url: str = None, text: str = None,
-                 provider: str = None):
+                 provider: str = None, message: str = None):
         self.status_code = status_code
         self.url = url
         self.text = text
         self.provider = provider
-        self.attributes = {"url": self.url, "link": self.text}
+        self.message = message
+        self.attributes = {"url": self.url, "link": self.text, "message": self.message}
         self.attributes_str = json.dumps(self.attributes)
 
     def json(self):
@@ -17,54 +19,51 @@ class Response:
 
 def test_success_tinyrul(get, mocker):
     mocker.patch('shorty.handler.requests.post',
-                 return_value=Response(status_code=200, url="https://example.com",
+                 return_value=MockResponse(status_code=200, url="https://example.com",
                                        text="https://tinyurl.com/peakb",
                                        provider="http://tinyurl.com/api-create.php"))
     response = get('/shortlinks', data={'url': "https://example.com", 'provider': 'tinyurl'})
-    assert response.json['status_code'] == 200
     assert response.json['link'] == "https://tinyurl.com/peakb"
     assert response.json['url'] == "https://example.com"
 
 
 def test_fail_tinyurl(get, mocker):
     mocker.patch('shorty.handler.requests.post',
-                 return_value=Response(status_code=400))
+                 return_value=MockResponse(status_code=400))
     response = get('/shortlinks', data={'url': 'https://example.com', 'provider': 'tinyurl'})
     assert response.json['status_code'] == 400
 
 
 def test_success_bitly(get, mocker):
     mocker.patch('shorty.handler.requests.post',
-                 return_value=Response(status_code=200, url="https://example.com",
+                 return_value=MockResponse(status_code=200, url="https://example.com",
                                        text="https://bit.ly/3cO2cpC",
                                        provider="https://api-ssl.bitly.com/v4/shorten"))
     response = get('/shortlinks', data={'url': 'https://example.com', 'provider': 'bitly'})
-    assert response.json['status_code'] == 200
     assert response.json['link'] == "https://bit.ly/3cO2cpC"
     assert response.json['url'] == "https://example.com"
 
 
 def test_fail_bitly(get, mocker):
     mocker.patch('shorty.handler.requests.post',
-                 return_value=Response(status_code=400))
+                 return_value=MockResponse(status_code=400))
     response = get('/shortlinks', data={'url': 'https://example.com', 'provider': 'bitly'})
     assert response.json['status_code'] == 400
 
 
 def test_success_no_provider(get, mocker):
     mocker.patch('shorty.handler.requests.post',
-                 return_value=Response(status_code=200, url="https://example.com",
+                 return_value=MockResponse(status_code=200, url="https://example.com",
                                        text="https://bit.ly/3cO2cpC",
                                        provider="https://api-ssl.bitly.com/v4/shorten"))
     response = get('/shortlinks', data={'url': 'https://example.com'})
-    assert response.json['status_code'] == 200
     assert response.json['link'] == "https://bit.ly/3cO2cpC"
     assert response.json['url'] == "https://example.com"
 
 
 def test_fail_no_provider(get, mocker):
     mocker.patch('shorty.handler.requests.post',
-                 return_value=Response(status_code=400))
+                 return_value=MockResponse(status_code=400))
     response = get('/shortlinks', data={'url': 'https://example.com'})
     assert response.json['status_code'] == 400
 
@@ -87,3 +86,21 @@ def test_fail_request_params_provider(get):
     assert response.json['status_code'] == 400
     assert response.json['message'] == "Invalid parameters. Provide a <url> and optionally " \
                                        "a <provider> parameter."
+
+
+def test_fail_request_params_invalid_url(get):
+    response = get('/shortlinks', data={'url': 'example.com', "provider": "tinyurl"})
+    assert response.json['status_code'] == 404
+    assert response.json['message'] == "Invalid Url. Please provide a valid url"
+
+
+def test_timeout_tinyurl(get, mocker):
+    mocker.patch('shorty.handler.requests.post', side_effect=Timeout)
+    response = get('/shortlinks', data={'url': 'https://example.com', "provider": "tinyurl"})
+    assert response.json['status_code'] == 408
+
+
+def test_timeout_bitly(get, mocker):
+    mocker.patch('shorty.handler.requests.post', side_effect=Timeout)
+    response = get('/shortlinks', data={'url': 'https://example.com', "provider": "bitly"})
+    assert response.json['status_code'] == 408

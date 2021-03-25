@@ -1,7 +1,7 @@
 import re
 from typing import Optional
 from flask import jsonify
-from shorty.Response import Response
+from shorty.ResponseOverride import ResponseOverride
 from shorty.errors import ErrorHandler
 from shorty.handler import Handler
 
@@ -38,17 +38,17 @@ class Shorty:
     def _make_requests(self):
 
         if self.provider == "unknown":
-            return Response(status_code=404,
+            return ResponseOverride(status_code=404,
                             message="Not supported Provider. Choose between bit.ly and tinyurl").to_dict()
         elif "tinyurl" in self.provider.lower():
             res = self.handler.post_request(provider=self.provider)
-            return Response(status_code=res.status_code, url=self.params['long_url'], link=res.text,
+            return ResponseOverride(status_code=res.status_code, url=self.params['long_url'], link=res.text,
                             provider=self.URL_method).to_dict()
         elif "bitly" in self.provider.lower():
             res = self.handler.post_request(provider=self.provider)
             link = None if res.status_code not in [200, 201] else res.json().get("link")
 
-            return Response(status_code=res.status_code, url=self.params['long_url'], link=link,
+            return ResponseOverride(status_code=res.status_code, url=self.params['long_url'], link=link,
                             provider=self.URL_method).to_dict()
 
     def shorten(self, supplied_provider=False):
