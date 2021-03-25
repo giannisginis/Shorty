@@ -1,4 +1,4 @@
-# <img src="icons/logo.jpeg" width="350" height="150"/>&nbsp;&nbsp;&nbsp;
+# <img src="icons/logo.jpeg" width="250" height="150"/>&nbsp;&nbsp;&nbsp;
 
 # Shorty
 
