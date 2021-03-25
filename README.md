@@ -10,11 +10,6 @@ A Url shortener API.
 * [Installation](#installation)
 * [Execution](#execution)
 * [Interface](#interface)
-* [Deployment](#-deployment)
-* [Configuration](#-configuration)
-* [Contributing](#-contributing)
-* [Changelog](#-changelog)
-
 
 Overview
 ---------
