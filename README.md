@@ -10,11 +10,6 @@ A Url shortener API.
 * [Installation](#installation)
 * [Execution](#execution)
 * [Interface](#interface)
-* [Deployment](#-deployment)
-* [Configuration](#-configuration)
-* [Contributing](#-contributing)
-* [Changelog](#-changelog)
-
 
 Overview
 ---------
@@ -53,33 +48,28 @@ If the provider is not supplied the microservice by default uses `bit.ly` and in
 
 ## Design
 
-The `Shorty` architecture and design are given in detail in the [design documentation](docs/design.md). 
+The `Shorty` architecture and design are given in detail in the [design documentation](documents/design.md). 
 
 
 ## Installation
 
-Installation guidelines can be found in [the installation document](docs/installation.md).
+Installation guidelines can be found in [the installation document](documents/installation.md).
 
 
 ## Execution
 
-With the virtual enviroment installed:
+Activate virtual environment:
+```Python
+$ source path2venv/bin/activate
+```
 
-Start flask server running:
+Start flask server:
 
 ```Python
-python run.py
+$ python run.py
 ```
-make the request:
+Make the request:
 
 ```bash
-curl -i -H "Content-Type: application/json" -X get -d '{"url":"www.example.com", "provider": "tinyurl"}' http://127.0.0.1:5000/shortlinks
+$ curl -i -H "Content-Type: application/json" -X get -d '{"url":"www.example.com", "provider": "tinyurl"}' http://127.0.0.1:5000/shortlinks
 ```
-
-Resources
----------
-
-1. `Flask`: http://flask.pocoo.org/
-2. `pytest`: http://pytest.org/latest/
-3. `virtualenvwrapper`: https://virtualenvwrapper.readthedocs.io/en/latest/
-4. `HTTP statuses`: https://httpstatuses.com/
