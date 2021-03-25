@@ -53,13 +53,13 @@ will install Python3.7. Python releases are available [here](https://www.python.
 With Python installed, change directory to a desired location and create a Python virtual environment,
 with
 ```bash
-$ cd /path2/Shorty
+$ cd /path2/Shorty_venv
 $ python -m venv shorty
-$ pip install -r requirements.txt
 ```
 Again, make sure you are using the correct Python executable, i.e. the correct `python` entry point.
 
 Activate the virtual environment using
 ```bash
-$ source Shorty/bin/activate
+$ source /path2/Shorty_venv/bin/activate
+$ pip install -r requirements.txt
 ```
