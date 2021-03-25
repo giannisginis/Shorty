@@ -10,7 +10,6 @@ class Validators:
     def _validate_url_type(url):
         if not validators.url(url):
             status_code = 404
-            # message = "Invalid Url. Please provide a valid url"
             message = Messages.WRONG_URL_MSG
         else:
             status_code = 200
@@ -22,7 +21,6 @@ class Validators:
         if not self.request.get("url") or (
                 len(self.request) == 2 and not self.request.get("provider")):
             status_code = 400
-            # message = "Invalid parameters. Provide a <url> and optionally a <provider> parameter."
             message = Messages.WRONG_PARAMETER_MSG
         else:
             status_code = 200

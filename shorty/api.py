@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from shorty.brain import Shorty
+from shorty.service import Shorty
 from shorty.errors import ErrorHandler
 from shorty.validators import Validators
 
@@ -14,9 +14,5 @@ def create_shortlink():
         return jsonify(
             ErrorHandler(message=message, status_code=status_code).to_dict())
 
-    if not req.get("provider"):
-        obj = Shorty(url=req.get('url'))
-        return obj.shorten(supplied_provider=False)
-    elif req.get("provider"):
-        obj = Shorty(url=req.get('url'), provider=req.get("provider"))
-        return obj.shorten(supplied_provider=True)
+    service = Shorty(url=req.get('url'), provider=req.get("provider"))
+    return service.shorten()
