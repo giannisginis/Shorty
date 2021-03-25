@@ -6,7 +6,7 @@ from shorty.validators import Validators
 api = Blueprint('api', __name__)
 
 
-@api.route('/shortlinks', methods=['GET'])
+@api.route('/shortlinks', methods=['POST'])
 def create_shortlink():
     req = request.get_json()
     status_code, message = Validators(req).validate()
