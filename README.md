@@ -71,12 +71,12 @@ $ source path2venv/bin/activate
 Start flask server running:
 
 ```Python
-python run.py
+$ python run.py
 ```
 make the request:
 
 ```bash
-curl -i -H "Content-Type: application/json" -X get -d '{"url":"www.example.com", "provider": "tinyurl"}' http://127.0.0.1:5000/shortlinks
+$ curl -i -H "Content-Type: application/json" -X get -d '{"url":"www.example.com", "provider": "tinyurl"}' http://127.0.0.1:5000/shortlinks
 ```
 
 Resources
