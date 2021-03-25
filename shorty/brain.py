@@ -60,9 +60,9 @@ class Shorty:
                 if results['status_code'] not in [200, 201]:
                     return jsonify(ErrorHandler(status_code=results['status_code']).to_dict())
                 else:
-                    return jsonify(results)
+                    return jsonify({"url": results["url"], "link": results["link"]})
             else:
-                return jsonify(results)
+                return jsonify({"url": results["url"], "link": results["link"]})
 
         elif supplied_provider:
             results = self._make_requests()
@@ -71,4 +71,4 @@ class Shorty:
                     ErrorHandler(message=results['message'],
                                  status_code=results['status_code']).to_dict())
             else:
-                return jsonify(results)
+                return jsonify({"url": results["url"], "link": results["link"]})
