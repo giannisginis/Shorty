@@ -9,7 +9,6 @@ A Url shortener API.
 * [Design](#design)
 * [Installation](#installation)
 * [Execution](#execution)
-* [Interface](#interface)
 
 Overview
 ---------
@@ -71,5 +70,5 @@ $ python run.py
 Make the request:
 
 ```bash
-$ curl -i -H "Content-Type: application/json" -X get -d '{"url":"www.example.com", "provider": "tinyurl"}' http://127.0.0.1:5000/shortlinks
+$ curl -i -H "Content-Type: application/json" -X post -d '{"url":"www.example.com", "provider": "tinyurl"}' http://127.0.0.1:5000/shortlinks
 ```
