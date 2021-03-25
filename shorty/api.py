@@ -5,7 +5,7 @@ from shorty.errors import ErrorHandler
 api = Blueprint('api', __name__)
 
 
-@api.route('/shortlinks', methods=['POST'])
+@api.route('/shortlinks', methods=['GET'])
 def create_shortlink():
     req = request.get_json()
     if not req.get("url") or (len(req) == 2 and not req.get("provider")):
