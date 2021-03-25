@@ -1,6 +1,4 @@
-# <img src="icons/logo.png" width="120" height="120"/>&nbsp;&nbsp;&nbsp;ml-server
-
-# Shorty
+# <img src="icons/logo.png" width="120" height="120"/>&nbsp;&nbsp;&nbsp;Shorty
 
 A Url shortener API.
 
@@ -88,6 +86,6 @@ and makes the proper post request for the `bit.ly` provider. If the response htt
 its default message. For both cases, the successfull response returns a json with the requested `url` and the corresponding `link`.
 
 
-# <img src="icons/fallback.png" width="120" height="120"/>&nbsp;&nbsp;&nbsp;ml-server
+# <img src="icons/fallback.png" width="120" height="120"/>&nbsp;&nbsp;&nbsp;Fallback design
 
 
