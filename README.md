@@ -52,19 +52,19 @@ If the provider is not supplied the microservice by default uses `bit.ly` and in
 * [Pytest-mock](https://github.com/pytest-dev/pytest-mock/)
 
 ## Design
-======================
+---------
 
 The `Shorty` architecture and design are given in detail in the [design documentation](docs/design.md). 
 
 
 ## Installation
-======================
+---------
 
 Installation guidelines can be found in [the installation document](docs/installation.md).
 
 
 ## Execution
-======================
+---------
 
 With the virtual enviroment installed:
 
