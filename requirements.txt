@@ -1,5 +1,6 @@
 validators
-pytest-mock==3.5.1
 requests
 flask==1.0.2
 pytest==4.0.1
+attrs==19.1.0
+pytest-mock
