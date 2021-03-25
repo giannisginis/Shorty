@@ -1,3 +1,20 @@
+# Shorty
+
+A Url shortener API.
+
+
+## Table of Contents
+
+* [Overview](#overview)
+* [Design](#design)
+* [Installation](#installation)
+* [Execution](#execution)
+* [Interface](#interface)
+* [Deployment](#-deployment)
+* [Configuration](#-configuration)
+* [Contributing](#-contributing)
+* [Changelog](#-changelog)
+
 Software Engineer Task
 ======================
 
@@ -14,13 +31,10 @@ consistent APIs for the rest of the system to consume. Each service should be ab
 pick sensible defaults (and fallbacks, if, for example, a provider is unavailable) or
 allow the consumer to specify the provider if they wish to do so.
 
-Mission
+Overview
 -------
 
-Your mission, should you choose to accept it, is to build a microservice called `shorty`, 
-which supports two URL shortening providers: [bit.ly](https://dev.bitly.com/) and [tinyurl.com](https://gist.github.com/MikeRogers0/2907534).
-You don't need to actually sign up to these providers, just implement their API. The
-service exposes a single endpoint: `POST /shortlinks`. The endpoint should receive
+`Shorty` is a microservice which supports two URL shortening providers: [bit.ly](https://dev.bitly.com/) and [tinyurl.com](https://gist.github.com/MikeRogers0/2907534). The service exposes a single endpoint: `POST /shortlinks`. The endpoint receive
 JSON with the following schema:
 
 | param    | type   | required | description                        |
@@ -28,7 +42,7 @@ JSON with the following schema:
 | url      | string | Y        | The URL to shorten                 |
 | provider | string | N        | The provider to use for shortening |
 
-The response should be a `Shortlink` resource containing:
+The response is a `Shortlink` resource containing:
 
 | param    | type   | required | description                        |
 |----------|--------|----------|------------------------------------|
@@ -43,16 +57,38 @@ For example:
 }
 ```
 
-You are free to decide how to pick between the providers if one is not requested and what
-your fallback strategy is in case your primary choice fails. Your endpoint needs to return
-a JSON response with a sensible HTTP status in case of errors or failures.
+If the provider is not supplied the microservice by default uses `bit.ly` and in case is not available fallback to `tinyurl`.
 
-What you need to do
--------------------
+### Technology stack
 
-1. Create a Python env (using Python 3.6+) and install the requirements.
-2. Build the `POST /shortlinks` endpoint. We've provided a skeleton API using `flask`.
-3. Write some tests. We've provided a test blueprint using `pytest`.
+* [Python 3.7.x](https://www.python.org/)
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+* [Pytest](https://docs.pytest.org/en/stable/)
+* [Pytest-mock](https://github.com/pytest-dev/pytest-mock/)
+
+## Design
+
+The `ml-server` architecture and design are given in detail in the [design documentation](docs/design.md). 
+
+
+## Installation
+
+Installation guidelines can be found in [the installation document](docs/installation.md).
+
+
+## Execution
+
+With the virtual enviroment installed:
+Start flask server running:
+
+```Python
+python run.py
+```
+make the request:
+
+```bash
+curl -i -H "Content-Type: application/json" -X get -d '{"url":"www.example.com", "provider": "tinyurl"}' http://127.0.0.1:5000/shortlinks
+```
 
 Deliverable
 -----------
