@@ -7,7 +7,6 @@ The project requirements can be installed using Python's builtin package manager
 * [Requirements](#requirements)
 * [Python Installation](#python-installation)
 * [Virtual Environment](#virtual-environment)
-* [The ml-server](#the-ml-server)
 
 
 ## Requirements
