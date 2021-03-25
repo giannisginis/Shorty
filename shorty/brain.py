@@ -25,7 +25,7 @@ class Shorty:
                 "Authorization": "Bearer 8ce4e9f7e73b0da7303a325b64bbb1c540e16a73",
                 "Content-Type": "application/json"
             }
-            self.URL_method = "https://api-ssl.bitly.com/v4/shortenn"
+            self.URL_method = "https://api-ssl.bitly.com/v4/shorten"
         else:
             self.provider = "unknown"
 
