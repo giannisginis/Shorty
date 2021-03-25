@@ -16,7 +16,7 @@ class Response:
 
 
 def test_success_tinyrul(get, mocker):
-    mocker.patch('shorty.brain.requests.post',
+    mocker.patch('shorty.handler.requests.post',
                  return_value=Response(status_code=200, url="https://example.com",
                                        text="https://tinyurl.com/peakb",
                                        provider="http://tinyurl.com/api-create.php"))
@@ -27,14 +27,14 @@ def test_success_tinyrul(get, mocker):
 
 
 def test_fail_tinyurl(get, mocker):
-    mocker.patch('shorty.brain.requests.post',
+    mocker.patch('shorty.handler.requests.post',
                  return_value=Response(status_code=400))
     response = get('/shortlinks', data={'url': 'https://example.com', 'provider': 'tinyurl'})
     assert response.json['status_code'] == 400
 
 
 def test_success_bitly(get, mocker):
-    mocker.patch('shorty.brain.requests.post',
+    mocker.patch('shorty.handler.requests.post',
                  return_value=Response(status_code=200, url="https://example.com",
                                        text="https://bit.ly/3cO2cpC",
                                        provider="https://api-ssl.bitly.com/v4/shorten"))
@@ -45,14 +45,14 @@ def test_success_bitly(get, mocker):
 
 
 def test_fail_bitly(get, mocker):
-    mocker.patch('shorty.brain.requests.post',
+    mocker.patch('shorty.handler.requests.post',
                  return_value=Response(status_code=400))
     response = get('/shortlinks', data={'url': 'https://example.com', 'provider': 'bitly'})
     assert response.json['status_code'] == 400
 
 
 def test_success_no_provider(get, mocker):
-    mocker.patch('shorty.brain.requests.post',
+    mocker.patch('shorty.handler.requests.post',
                  return_value=Response(status_code=200, url="https://example.com",
                                        text="https://bit.ly/3cO2cpC",
                                        provider="https://api-ssl.bitly.com/v4/shorten"))
@@ -63,7 +63,7 @@ def test_success_no_provider(get, mocker):
 
 
 def test_fail_no_provider(get, mocker):
-    mocker.patch('shorty.brain.requests.post',
+    mocker.patch('shorty.handler.requests.post',
                  return_value=Response(status_code=400))
     response = get('/shortlinks', data={'url': 'https://example.com'})
     assert response.json['status_code'] == 400

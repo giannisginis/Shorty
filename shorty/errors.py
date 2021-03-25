@@ -1,9 +1,4 @@
-from werkzeug.exceptions import HTTPException, RequestTimeout
-from flask import Blueprint, jsonify
 from http.client import responses
-import requests
-
-errors = Blueprint("errors", __name__)
 
 
 class ErrorHandler(Exception):
