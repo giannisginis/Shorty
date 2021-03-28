@@ -70,10 +70,16 @@ CD to project:
 $ cd Shorty
 ```
 
-Start flask server:
+Start flask server locally:
 
 ```Python
 $ python run.py
+```
+Start flask server with docker (docker is required):
+
+```Bash
+$ docker build -t shorty:latest .
+$ docker run -p 5000:5000 -d shorty
 ```
 Make the request:
 
