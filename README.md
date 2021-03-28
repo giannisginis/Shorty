@@ -75,7 +75,7 @@ Start flask server locally:
 ```Python
 $ python run.py
 ```
-Start flask server with docker (docker is required):
+Or if you prefer Start flask server with `docker` (docker is required):
 
 ```Bash
 $ docker build -t shorty:latest .
